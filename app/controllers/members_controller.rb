@@ -25,7 +25,7 @@ class MembersController < ApplicationController
   # POST /members.json
   def create
     @member = Member.new(member_params)
-
+    @member.shortened_url = "www.#{SecureRandom.uuid[0..5]}.com"
     respond_to do |format|
       if @member.save
         HeadingsUtil.save_headings(@member)
