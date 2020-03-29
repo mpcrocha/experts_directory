@@ -8,4 +8,14 @@ class Member < ApplicationRecord
   def friends_lists
     Friendship.where(friend: self).or(Friendship.where(member: self))
   end
+
+  def friends_links
+    friends = friends_lists
+    friends.each do |friend|
+      if friend.member == self
+        friend.friend
+      end
+    end
+  end
+
 end

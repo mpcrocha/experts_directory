@@ -7,13 +7,46 @@
 
 <p>
   <strong>Personal website:</strong>
-  <%= @member.personal_website %>
+  <%= link_to "#{@member.personal_website}", @member.personal_website %>
 </p>
 
 <p>
   <strong>Shortened url:</strong>
-  <%= @member.shortened_url %>
+  <%= link_to "#{@member.shortened_url}", @member.personal_website %>
 </p>
+
+<p>
+  <strong>headings:</strong>
+  <% @member.headings.each do |heading| %>
+  <p>
+    <%= heading.topic %>
+  </p>
+
+  <% end %>
+</p>
+
+<p>
+  <strong>Friends pages:</strong>
+  <% @member.friends_lists.each do |frienship| %>
+
+    <% if frienship.friend.id != @member.id %>
+      <p>
+        <%= link_to "#{frienship.friend.name}", "http://0.0.0.0:3000/members/#{frienship.friend.id}" %>
+      </p>
+    <% end %>
+
+    <% if frienship.member.id != @member.id %>
+      <p>
+        <%= link_to "#{frienship.member.name}", "http://0.0.0.0:3000/members/#{frienship.member.id}" %>
+      </p>
+    <% end %>
+
+  <% end %>
+</p>
+
+
+
+
 
 <%= link_to 'Edit', edit_member_path(@member) %> |
 <%= link_to 'Back', members_path %>
