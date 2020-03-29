@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,25 +12,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_29_193301) do
-
+ActiveRecord::Schema.define(version: 20_200_329_201_810) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  enable_extension 'plpgsql'
 
-  create_table "headings", force: :cascade do |t|
-    t.bigint "member_id"
-    t.string "topic"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["member_id"], name: "index_headings_on_member_id"
+  create_table 'friendships', force: :cascade do |t|
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.bigint 'member_id'
+    t.bigint 'friend_id'
+    t.index ['friend_id'], name: 'index_friendships_on_friend_id'
+    t.index ['member_id'], name: 'index_friendships_on_member_id'
   end
 
-  create_table "members", force: :cascade do |t|
-    t.string "name"
-    t.string "personal_website"
-    t.string "shortened_url"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+  create_table 'headings', force: :cascade do |t|
+    t.bigint 'member_id'
+    t.string 'topic'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.index ['member_id'], name: 'index_headings_on_member_id'
   end
 
+  create_table 'members', force: :cascade do |t|
+    t.string 'name'
+    t.string 'personal_website'
+    t.string 'shortened_url'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+  end
+
+  add_foreign_key 'friendships', 'members'
+  add_foreign_key 'friendships', 'members', column: 'friend_id'
 end
