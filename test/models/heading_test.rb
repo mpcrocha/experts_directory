@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class MemberTest < ActiveSupport::TestCase
+class HeadingTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class MembersController < ApplicationController
-  before_action :set_member, only: [:show, :edit, :update, :destroy]
+  before_action :set_member, only: %i[show edit update destroy]
 
   # GET /members
   # GET /members.json
@@ -9,8 +11,7 @@ class MembersController < ApplicationController
 
   # GET /members/1
   # GET /members/1.json
-  def show
-  end
+  def show; end
 
   # GET /members/new
   def new
@@ -18,8 +19,7 @@ class MembersController < ApplicationController
   end
 
   # GET /members/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /members
   # POST /members.json
@@ -28,6 +28,7 @@ class MembersController < ApplicationController
 
     respond_to do |format|
       if @member.save
+        HeadingsUtil.save_headings(@member)
         format.html { redirect_to @member, notice: 'Member was successfully created.' }
         format.json { render :show, status: :created, location: @member }
       else
@@ -62,13 +63,14 @@ class MembersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_member
-      @member = Member.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def member_params
-      params.require(:member).permit(:name, :personal_website, :shortned_url)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_member
+    @member = Member.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def member_params
+    params.require(:member).permit(:name, :personal_website, :shortned_url)
+  end
 end

@@ -10,15 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_29_190014) do
+ActiveRecord::Schema.define(version: 2020_03_29_193301) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "headings", force: :cascade do |t|
+    t.bigint "member_id"
+    t.string "topic"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["member_id"], name: "index_headings_on_member_id"
+  end
+
   create_table "members", force: :cascade do |t|
     t.string "name"
     t.string "personal_website"
-    t.string "shortned_url"
+    t.string "shortened_url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
