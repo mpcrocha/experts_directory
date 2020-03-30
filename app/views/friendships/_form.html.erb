@@ -11,20 +11,11 @@
     </div>
   <% end %>
 
-<!--  <div class="field">-->
-    <%#= form.label :member %>
-    <%#= form.text_field :member %>
-<!--  </div>-->
-
   <div class="field">
     <%= form.label :member %>
     <%= form.select 'member' ,options_for_select(@members.map{|member| [member.name, member.id] }) %>
   </div>
 
-<!--  <div class="field">-->
-    <%#= form.label :friend %>
-    <%#= form.text_field :friend %>
-<!--  </div>-->
   <div class="field">
     <%= form.label :friend %>
     <%= form.select 'friend', options_for_select(@members.map{|member| [member.name, member.id] }) %>

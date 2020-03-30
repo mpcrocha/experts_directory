@@ -9,13 +9,13 @@ class Member < ApplicationRecord
     Friendship.where(friend: self).or(Friendship.where(member: self))
   end
 
-  def friends_links
+  def member_friends
+    member_friends = []
     friends = friends_lists
     friends.each do |friend|
-      if friend.member == self
-        friend.friend
-      end
+      member_friends.append(friend.friend) if friend.friend != self
+      member_friends.append(friend.member) if friend.member != self
     end
+    member_friends
   end
-
 end

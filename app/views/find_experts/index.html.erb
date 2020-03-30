@@ -1,0 +1,11 @@
+<p id="notice"><%= notice %></p>
+
+<%= form_with(url: "/find_experts/find_experts", method: "get", local: true) do %>
+
+  <%= select_tag('member', options_for_select(@members.map{|member| [member.name, member.id] })) %>
+
+  <%= label_tag(:q, "Search for:") %>
+  <%= text_field_tag(:q) %>
+  <%= submit_tag("Search") %>
+
+<% end %>

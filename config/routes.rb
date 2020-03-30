@@ -3,5 +3,6 @@
 Rails.application.routes.draw do
   resources :friendships
   resources :members
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  resources :find_experts, only: [:index]
+  get '/find_experts/find_experts', to: 'find_experts#find_experts'
 end
