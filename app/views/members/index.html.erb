@@ -16,7 +16,7 @@
     <% @members.each do |member| %>
       <tr>
         <td><%= member.name %></td>
-        <td><%= link_to "#{member.shortened_url}", member.personal_website %></td>
+        <td><%= link_to "#{member.shortened_url}", member.shortened_url %></td>
         <td><%= member.friends_lists.size %></td>
         <td><%= link_to 'Show', member %></td>
         <td><%= link_to 'Edit', edit_member_path(member) %></td>

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class MembersController < ApplicationController
+  require "shorturl"
   before_action :set_member, only: %i[show edit update destroy]
 
   # GET /members
@@ -25,7 +26,7 @@ class MembersController < ApplicationController
   # POST /members.json
   def create
     @member = Member.new(member_params)
-    @member.shortened_url = "www.#{SecureRandom.uuid[0..5]}.com"
+    @member.shortened_url = ShortURL.shorten(@member.personal_website, :tinyurl)
     respond_to do |format|
       if @member.save
         HeadingsUtil.save_headings(@member)
